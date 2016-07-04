@@ -6,7 +6,7 @@
 
 - Clone the repo
 - Install dependencies `composer install`
-- Update `acceptance.suite.yml` files inside the `tests/` directory with your BrowserStack Username and Access Key. (These can be found in the [settings](https://www.browserstack.com/accounts/settings) section on BrowserStack accounts page)
+- Update `tests/acceptance.suite.yml` file with your BrowserStack Username and Access Key. (These can be found in the [settings](https://www.browserstack.com/accounts/settings) section on BrowserStack accounts page)
 - Alternatively, you can export the environment variables for the Username and Access Key of your BrowserStack account. `export BROWSERSTACK_USERNAME=<browserstack-username> && export BROWSERSTACK_ACCESS_KEY=<browserstack-access-key>`
 
 ### Run the tests
