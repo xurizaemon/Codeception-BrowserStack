@@ -1,6 +1,0 @@
-{
-  "require": {
-    "codegyre/robo": "*",
-    "codeception/robo-paracept": "@dev"
-  }
-}
