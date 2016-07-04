@@ -21,6 +21,7 @@ class Robofile extends \Robo\Tasks
                 $this->taskCodecept() // use built-in Codecept task
                 ->suite('acceptance') // run acceptance tests
                 ->env("parallel_$i")          // in its own environment
+                ->group("single")
                 ->xml("tests/_log/result_$i.xml") 
               );
         }
