@@ -1,28 +1,37 @@
 <?php
+
 require_once 'vendor/autoload.php';
 
+/**
+ * This is project's console commands configuration for Robo task runner.
+ *
+ * @see http://robo.li/
+ */
 class Robofile extends \Robo\Tasks
 {
     use \Codeception\Task\MergeReports;
 
+    private $numParallel = 4;
+
     public function parallelRun()
     {
         $parallel = $this->taskParallelExec();
-        for ($i = 1; $i <= 4; $i++) {            
+        for ($i = 0; $i < $this->numParallel; $i++) {            
             $parallel->process(
                 $this->taskCodecept() // use built-in Codecept task
                 ->suite('acceptance') // run acceptance tests
-                ->env("p$i")          // in its own environment
+                ->env("parallel_$i")          // in its own environment
+                ->group("single")
                 ->xml("tests/_log/result_$i.xml") 
               );
         }
         return $parallel->run();
     }
 
-     function parallelMergeResults()
+    function parallelMergeResults()
     {
         $merge = $this->taskMergeXmlReports();
-        for ($i=1; $i<=4; $i++) {
+        for ($i=0; $i<$this->numParallel; $i++) {
             $merge->from("tests/_output/tests/_log/result_$i.xml");
         }
         $merge->into("tests/_output/tests/_log/result.xml")
@@ -35,6 +44,5 @@ class Robofile extends \Robo\Tasks
         $this->parallelMergeResults();
         return $result;
     }
-
 }
 ?>
